@@ -17,13 +17,9 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-image: url("../../public/background2.jpg"); /* Replace 'your_image_url.jpg' with the path to your image */
+  background-size: cover;
+  background-position: center;
 }
 
 @layer utilities {
