@@ -2,13 +2,15 @@
 import Image from "next/image";
 import MattPic from "../../public/matt1.jpg";
 import FlyingBalloons from "./FlyingBaloons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 export default function Home() {
-  const [audio] = useState<HTMLAudioElement | null>(new Audio("Murica.mp3")); // Replace 'your_music_file.mp3' with the path to your music file
-  if (audio) audio.volume = 0.5;
+  const audio = useRef<HTMLAudioElement | null>(
+    typeof Audio !== "undefined" ? new Audio("Murica.mp3") : null
+  );
+  if (audio.current) audio.current.volume = 0.5;
 
   const handlePlay = () => {
-    if (audio) audio.play();
+    if (audio.current) audio.current.play();
   };
   return (
     <>
