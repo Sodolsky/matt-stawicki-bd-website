@@ -4,11 +4,11 @@ import MattPic from "../../public/matt1.jpg";
 import FlyingBalloons from "./FlyingBaloons";
 import { useEffect, useState } from "react";
 export default function Home() {
-  const [audio] = useState(new Audio("Murica.mp3")); // Replace 'your_music_file.mp3' with the path to your music file
-  audio.volume = 0.5; // Adjust the volume as needed
+  const [audio] = useState<HTMLAudioElement | null>(new Audio("Murica.mp3")); // Replace 'your_music_file.mp3' with the path to your music file
+  if (audio) audio.volume = 0.5;
 
   const handlePlay = () => {
-    audio.play();
+    if (audio) audio.play();
   };
   return (
     <>
