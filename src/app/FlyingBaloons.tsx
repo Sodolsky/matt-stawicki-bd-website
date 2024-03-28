@@ -7,21 +7,28 @@ const FlyingBalloons: React.FC = () => {
   const [balloons, setBalloons] = useState<{ x: number; y: number }[]>([]);
 
   useEffect(() => {
-    // Generate random number of balloons
-    const count = 10;
-    setBalloons(Array.from({ length: count }, getRandomPosition));
+    if (typeof window !== "undefined") {
+      // Generate random number of balloons
+      const count = 10;
+      setBalloons(Array.from({ length: count }, getRandomPosition));
+    }
   }, []);
 
   const getRandomPosition = (): { x: number; y: number } => {
-    return {
-      x: Math.random() * window.innerWidth,
-      y: -100, // Start balloons from above the screen
-    };
+    if (typeof window !== "undefined") {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: -100, // Start balloons from above the screen
+      };
+    } else {
+      // Fallback position if window is undefined
+      return { x: 0, y: -100 };
+    }
   };
 
   const styles = useSpring({
     from: { y: -100 },
-    to: { y: window.innerHeight + 100 }, // Move balloons to below the screen
+    to: { y: typeof window !== "undefined" ? window.innerHeight + 100 : 0 }, // Move balloons to below the screen
     config: { duration: 3000 }, // Animation duration
     onRest: () => {
       // Reset position when animation ends
